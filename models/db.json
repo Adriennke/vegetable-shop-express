@@ -1,6 +1,5 @@
 {
-  "vegetables": [
-    {
+  "vegetables": [{
       "vegetable2": "zukkini",
       "vegetable3": "pumpkin",
       "id": "Wed Apr 22 2020 15:42:05 GMT+0200 (Central European Summer Time)"
@@ -10,6 +9,11 @@
       "vegetable3": "pumpkin",
       "vegetable4": "paprika",
       "id": "Wed Apr 22 2020 15:43:14 GMT+0200 (Central European Summer Time)"
+    },
+    {
+      "id": "1587722155153",
+      "vegetable2": "zukkini",
+      "vegetable3": "onions"
     }
   ]
 }

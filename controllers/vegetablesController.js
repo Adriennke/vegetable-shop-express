@@ -3,7 +3,7 @@ const db = require("../models/db")
 const createError = require("http-errors")
 
 //set up route to new page
-exports.getVegetables = (req, res) => {
+exports.getVegetableById = (req, res) => {
    const {id} = req.params
    //get all records and find the ones whose id matches with id 
    let vegetable = db.get("vegetables").find({id}).value()
@@ -11,6 +11,14 @@ exports.getVegetables = (req, res) => {
        success: true,
        vegetable: vegetable
    })
+}
+exports.getVegetables = (req, res) => {
+    //get all records and find the ones whose id matches with id 
+    let vegetables = db.get("vegetables").value()
+    res.json({
+        success: true,
+        vegetable: vegetables
+    })
 }
 //request to add data
 exports.postVegetables = (req, res) => {

@@ -11,35 +11,14 @@ const port = process.env.PORT || 4000;
 //import routes
 const indexRoute = require("./routes/indexRoute")
 const vegetablesRoute = require("./routes/vegetablesRoute")
+const usersRoute = require("./routes/usersRoute")
+const ordersRoute = require("./routes/ordersRoute")
 
 app.use(express.json())
 app.use("/", indexRoute)
 app.use("/vegetables", vegetablesRoute)
-
-//home 
-// app.get("/", (req, res)=>{
-//     res.send("hi")
-// })
-
-//vegetables
-// app.get("/vegetables", (req, res) =>{
-//     res.send("get request")
-// })
-
-// app.post("/vegetables", (req, res)=>{
-//     console.log(req.body)
-//     res.send("post request")
-// })
-//replace the whole vegetable
-// app.put("/vegetables/:id", (req, res)=>{
-//     console.log(req.params.id)
-//     res.send("request")
-// })
-// app.delete("/vegetables/:id", (req, res)=>{
-//     console.log(req.params.id)
-//     res.send("delete request")
-// })
-
+app.use("/users", usersRoute)
+app.use("/orders", ordersRoute)
 
 app.use((req, res, next)=>{
     next(createError(404))
