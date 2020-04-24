@@ -15,7 +15,7 @@ const port = process.env.PORT || 4000;
 //import routes
 const indexRoute = require("./routes/indexRoute")
 const vegetablesRoute = require("./routes/vegetablesRoute")
-// const usersRoute = require("./routes/usersRoute")
+const usersRoute = require("./routes/usersRoute")
 // const ordersRoute = require("./routes/ordersRoute")
 
 mongoose.connect(
@@ -30,7 +30,7 @@ mongoose.connection.on("open", () => console.log("database is connected"))
 app.use(express.json())
 app.use("/", indexRoute)
 app.use("/vegetables", vegetablesRoute)
-// app.use("/users", usersRoute)
+app.use("/users", usersRoute)
 // app.use("/orders", ordersRoute)
 
 

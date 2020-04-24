@@ -1,66 +1,85 @@
 //the controller folder handles any incoming url requests
-const db = require("../models/db")
+const createError = require("http-errors")
+// const db = require("../models/db")
+const User = require("../models/usersSchema")
 
 // //set up route to new page
-// exports.getUsers = (req, res) => {
-//     const {
-//         id
-//     } = req.params
-//     //get all records and find the ones whose id matches with id 
-//     let user = db.get("users").find({
-//         id
-//     }).value()
-//     res.json({
-//         success: true,
-//         user: user
-//     })
-// }
+exports.getUsers = async(req, res, next) => {
+ try {
+     const users = await User.find()
+     res.json({
+         success:true,
+         users: users
+     })
+ }
+  catch (error) {
+     next(error)
+ }
+}
+
+exports.getUserById = async (req, res, next) => {
+    const {id} = req.params;
+    try {
+        const user = await User.findById(id)
+        if (!user) throw createError(404)
+        res.json({
+            success: true,
+            users: user
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 // //request to add data
-// exports.postUsers = (req, res) => {
-//     //get the value from user and store it into db, if the user not giving id, we assign one using new date
-//     db.get("users").push(req.body).last().assign({
-//         id: new Date().getTime().toString()
-//     }).write()
-//     res.json({
-//         success: true,
-//         user: req.body
-//     })
-// }
+exports.postUser = async(req, res, next) => {
+    try {
+        const user = new User(
+            {
+               firstName: req.body.firstName,
+               lastName: req.body.lastName,
+               email: req.body.email,
+               password: req.body.password 
+            }
+        )
+        await user.save()
+        res.json({
+            success: true, user:user
+        })
+    }
+     catch (error) {
+       next(error) 
+    }
+}
 // //request to update data
-// exports.putUsers = (req, res) => {
-//     //req.params searches the URL path
-//     const {
-//         id
-//     } = req.params
+exports.putUser = async(req, res, next) => {
+    //req.params searches the URL path
+    const {
+        id
+    } = req.params
 
-//     const user = req.body
+try {
+    const user = await User.findByIdAndUpdate(id, req.body)
+    const updatedUser = await User.findById(id)
+    res.json({
+        success:true,
+        user:updatedUser
+    })
+} 
+catch (error) {
+    next(error)
+}
+}
 
-//     //set the id to date
-//     user.id = new Date().toString()
-//     //get the user, find the id and assign a new veggie to it, then save it
-//     db.get("users").find({
-//         id
-//     }).assign(user).write()
-
-//     //if the request is successful, user constant gonna become new user.
-//     res.json({
-//         success: true,
-//         user: user
-//     })
-// }
-
-// exports.deleteUsers = (req, res) => {
-//     if (id !== 1) {
-//         next(createError(500))
-//     }
-//     const {
-//         id
-//     } = req.params
-//     let user = db.get("users").remove({
-//         id
-//     }).write()
-//     res.json({
-//         success: true,
-//         user: user
-//     })
-// }
+exports.deleteUser = async(req, res, next) => {
+ const { id } = req.params;
+ try {
+     const deletedUser = await User.findByIdAndDelete(id)
+     res.json({
+         success: true,
+         user: this.deleteUser
+     })
+ } 
+ catch (error) {
+    next(error)    
+ }
+}
