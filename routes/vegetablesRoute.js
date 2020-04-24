@@ -1,13 +1,23 @@
 const Router = require("express").Router()
 
-const { getVegetables, postVegetables, putVegetables, deleteVegetables } = require("../controllers/vegetablesController")
+const {
+    getVegetableById,
+    getVegetables,
+    postVegetable,
+    putVegetable,
+    deleteVegetable
+} = require("../controllers/vegetablesController")
 
-Router.get("/", getVegetables )
 
-Router.post("/", postVegetables)
 
-Router.put("/:id", putVegetables)
+Router.get("/:id", getVegetableById)
 
-Router.delete("/:id", deleteVegetables)
+Router.get("/", getVegetables)
+
+Router.post("/", postVegetable)
+
+Router.put("/:id", putVegetable)
+
+Router.delete("/:id", deleteVegetable)
 
 module.exports = Router;

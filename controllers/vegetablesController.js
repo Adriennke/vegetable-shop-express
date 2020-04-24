@@ -1,49 +1,95 @@
 //the controller folder handles any incoming url requests
-const db = require("../models/db")
 const createError = require("http-errors")
 
-//set up route to new page
-exports.getVegetables = (req, res) => {
-   const {id} = req.params
-   //get all records and find the ones whose id matches with id 
-   let vegetable = db.get("vegetables").find({id}).value()
-   res.json({
-       success: true,
-       vegetable: vegetable
-   })
+const Vegetable = require("../models/vegetablesSchema")
+
+// //set up route to new page
+exports.getVegetableById = async(req, res, next) => {
+    const {id} = req.params
+
+ try {
+   const vegetable = await Vegetable.findById(id)
+    res.json({
+        success: true,
+        data: vegetable
+    })
+ } 
+ catch (error) {
+     next(error)
+ }
 }
-//request to add data
-exports.postVegetables = (req, res) => {
-    //get the value from user and store it into db, if the user not giving id, we assign one using new date
-    db.get("vegetables").push(req.body).last().assign({ id:new Date().getTime().toString()}).write()
-    res.json({success:true, vegetable: req.body})
+
+exports.getVegetables = async(req, res, next) => {
+  try {
+      const vegetables = await Vegetable.find()
+      res.json({
+          success: true,
+          data: vegetables
+      })
+  } 
+  catch (error) {
+      //instead of console.log, catch the error
+      next(error)
+  }
 }
-//request to update data
-exports.putVegetables = (req, res) => {
+// //request to add data
+exports.postVegetable = async(req, res, next) => {
+    try {
+        const vegetable = new Vegetable(
+            { 
+                name: req.body.name,
+                price: req.body.price,
+                origin: req.body.origin,
+                image: req.body.image
+
+            })
+            //save it in db
+        vegetable.save()
+        res.json({
+            success: true,
+            data: vegetable
+        })
+
+    } 
+    
+    catch (error) {
+        next(error)
+    }
+
+}
+
+
+
+// //request to update data
+exports.putVegetable = async(req, res, next) => {
     //req.params searches the URL path
     const {id} = req.params
 
-    const vegetable = req.body
+    try {
+        const vegetable = await Vegetable.findByIdAndUpdate(id, req.body)
+        const updatedVegetable = await Vegetable.findById(id)
+        res.json({
+            success: true,
+            data: updatedVegetable
+        })
+    } 
+    catch (error) {
+        next(error)
+    }
 
-    //set the id to date
-    // vegetable.id = new Date().toString()
-    //get the vegetable, find the id and assign a new veggie to it, then save it
-    db.get("vegetables").find({id}).assign(vegetable).write()
-
-    //if the request is successful, vegetable constant gonna become new vegetable.
-    res.json({success:true, vegetable:vegetable})
 }
 
-exports.deleteVegetables = (req, res, next) => {
-    if (req.params.id !== 1) {
-        next(createError(500))
+exports.deleteVegetable = async(req, res, next) => {
+    const {id} = req.params;
+    try {
+        const deletedVegetable = await Vegetable.findByIdAndRemove(id)
+        res.json({
+            success: true,
+            data: deletedVegetable
+
+        })
+    } 
+    catch (error) {
+        next(error)
     }
-    const {id} = req.params
-    let vegetable = db.get("vegetables").remove({
-        id
-    }).write();
-    res.json({
-        success: true,
-        vegetable: vegetable
-    })
 }

@@ -4,41 +4,34 @@ const createError = require("http-errors")
 
 //create app object
 const app = express()
+const mongoose = require("mongoose")
+
 
 //specify port
 const port = process.env.PORT || 4000;
 
+
+
 //import routes
 const indexRoute = require("./routes/indexRoute")
 const vegetablesRoute = require("./routes/vegetablesRoute")
+// const usersRoute = require("./routes/usersRoute")
+// const ordersRoute = require("./routes/ordersRoute")
+
+mongoose.connect(
+    "mongodb://127.0.0.1:27017/vegetable-shop", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+)
+mongoose.connection.on("error", (err) => console.log(err))
+mongoose.connection.on("open", () => console.log("database is connected"))
 
 app.use(express.json())
 app.use("/", indexRoute)
 app.use("/vegetables", vegetablesRoute)
-
-//home 
-// app.get("/", (req, res)=>{
-//     res.send("hi")
-// })
-
-//vegetables
-// app.get("/vegetables", (req, res) =>{
-//     res.send("get request")
-// })
-
-// app.post("/vegetables", (req, res)=>{
-//     console.log(req.body)
-//     res.send("post request")
-// })
-//replace the whole vegetable
-// app.put("/vegetables/:id", (req, res)=>{
-//     console.log(req.params.id)
-//     res.send("request")
-// })
-// app.delete("/vegetables/:id", (req, res)=>{
-//     console.log(req.params.id)
-//     res.send("delete request")
-// })
+// app.use("/users", usersRoute)
+// app.use("/orders", ordersRoute)
 
 
 app.use((req, res, next)=>{
