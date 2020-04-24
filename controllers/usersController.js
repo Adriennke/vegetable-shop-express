@@ -1,5 +1,5 @@
-// //the controller folder handles any incoming url requests
-// const db = require("../models/db")
+//the controller folder handles any incoming url requests
+const db = require("../models/db")
 
 // //set up route to new page
 // exports.getUsers = (req, res) => {
