@@ -16,7 +16,7 @@ const port = process.env.PORT || 4000;
 const indexRoute = require("./routes/indexRoute")
 const vegetablesRoute = require("./routes/vegetablesRoute")
 const usersRoute = require("./routes/usersRoute")
-// const ordersRoute = require("./routes/ordersRoute")
+const ordersRoute = require("./routes/ordersRoute")
 
 mongoose.connect(
     "mongodb://127.0.0.1:27017/vegetable-shop", {
@@ -31,7 +31,7 @@ app.use(express.json())
 app.use("/", indexRoute)
 app.use("/vegetables", vegetablesRoute)
 app.use("/users", usersRoute)
-// app.use("/orders", ordersRoute)
+app.use("/orders", ordersRoute)
 
 
 app.use((req, res, next)=>{

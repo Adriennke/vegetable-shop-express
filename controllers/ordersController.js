@@ -1,63 +1,79 @@
 const createError = require("http-errors")
-exports.getOrders = (req, res) => {
+const Order = require("../models/ordersSchema")
+
+exports.getOrders = async(req, res, next) => {
+     try {
+      const orders = await Order.find()
+      res.json({
+          success: true,
+          order:orders
+      })
+}
+ catch (error) {
+    next(error)
+}
+}
+exports.getOrderById = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const order = await Order.findById(id)
+         if (!order) throw createError(404)
+        res.json({
+            success: true,
+            order:order
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.postOrder = async(req, res, next) => {
+  try {
+      const order = new Order({
+          product: req.body.product,
+          amount: req.body.amount,
+          price: req.body.price
+      })
+        await order.save()
+        res.json({
+            success: true,
+            order:order
+        })
+  } catch (error) {
+      next(error)
+  }
+}
+
+exports.putOrder = async(req, res, next) => {
     const {
         id
     } = req.params
-    //get all records and find the ones whose id matches with id 
-    let order = db.get("orders").find({
-        id
-    }).value()
-    res.json({
-        success: true,
-        order: order
-    })
+    try {
+        const order = await
+        Order.findByIdAndUpdate(id,req.body )
+        const updatedOrder = await
+        Order.findById(id)
+        res.json({
+            success: true,
+            order: updatedOrder
+        })
+    } 
+    catch (error) {
+        next(error)
+    }
 }
-// //request to add data
-// exports.postOrders = (req, res) => {
-//     //get the value from user and store it into db, if the user not giving id, we assign one using new date
-//     db.get("orders").push(req.body).last().assign({
-//         id: new Date().toString()
-//     }).write()
-//     res.json({
-//         success: true,
-//         order: req.body
-//     })
-// }
-// //request to update data
-// exports.putOrders = (req, res) => {
-//     //req.params searches the URL path
-//     const {
-//         id
-//     } = req.params
 
-//     const order = req.body
-
-//     //set the id to date
-//     order.id = new Date().toString()
-//     //get the order, find the id and assign a new veggie to it, then save it
-//     db.get("orders").find({
-//         id
-//     }).assign(order).write()
-
-//     //if the request is successful, order constant gonna become new order.
-//     res.json({
-//         success: true,
-//         order: order
-//     })
-// }
-
-// exports.deleteOrders = (req, res) => {
-//     if (id !== 1) {
-//         next(createError(500))
-//     }
-//     const {
-//         id
-//     } = req.params
-//     let order = db.get("orders").remove({
-//         id
-//     }).write()
-//     res.json({
-//         success: true,
-//         order: order
-//     })
-// }
+exports.deleteOrder = async(req, res, next) => {
+    const { id }=req.params;
+   try {
+           const deletedOrder = await Order.findByIdAndDelete(id)
+           res.json({
+               success: true,
+               order: this.deletedOrder
+           })
+   } 
+   catch (error) {  
+        next(error)       
+   }
+ 
+}

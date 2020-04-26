@@ -2,17 +2,20 @@ const Router = require("express").Router()
 
 const {
     getOrders,
-    postOrders,
-    putOrders,
-    deleteOrders
+    getOrderById,
+    postOrder,
+    putOrder,
+    deleteOrder
 } = require("../controllers/ordersController")
 
 Router.get("/", getOrders)
 
-Router.post("/", postOrders)
+Router.get("/", getOrderById)
 
-Router.put("/:id", putOrders)
+Router.post("/", postOrder)
 
-Router.delete("/:id", deleteOrders)
+Router.put("/:id", putOrder)
+
+Router.delete("/:id", deleteOrder)
 
 module.exports = Router;

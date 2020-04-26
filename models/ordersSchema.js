@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const OrderSchema = new Schema({
     product: {type: String, required: true},
-    amount: {type: String, required: true},
-    price: {type: String, required: true}
+    amount: {type: Number, required: true},
+    price: {type: Number, required: true}
 }
 // {
 //     toObject:{

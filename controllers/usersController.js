@@ -76,7 +76,7 @@ exports.deleteUser = async(req, res, next) => {
      const deletedUser = await User.findByIdAndDelete(id)
      res.json({
          success: true,
-         user: this.deleteUser
+         user: this.deletedUser
      })
  } 
  catch (error) {
