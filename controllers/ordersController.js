@@ -1,20 +1,17 @@
-// //the controller folder handles any incoming url requests
-// const db = require("../models/db")
-
-// //set up route to new page
-// exports.getOrders = (req, res) => {
-//     const {
-//         id
-//     } = req.params
-//     //get all records and find the ones whose id matches with id 
-//     let order = db.get("orders").find({
-//         id
-//     }).value()
-//     res.json({
-//         success: true,
-//         order: order
-//     })
-// }
+const createError = require("http-errors")
+exports.getOrders = (req, res) => {
+    const {
+        id
+    } = req.params
+    //get all records and find the ones whose id matches with id 
+    let order = db.get("orders").find({
+        id
+    }).value()
+    res.json({
+        success: true,
+        order: order
+    })
+}
 // //request to add data
 // exports.postOrders = (req, res) => {
 //     //get the value from user and store it into db, if the user not giving id, we assign one using new date
