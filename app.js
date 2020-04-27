@@ -5,6 +5,7 @@ const createError = require("http-errors")
 //create app object
 const app = express()
 const mongoose = require("mongoose")
+const logger = require("morgan")
 
 
 //specify port
@@ -28,6 +29,8 @@ mongoose.connection.on("error", (err) => console.log(err))
 mongoose.connection.on("open", () => console.log("database is connected"))
 
 app.use(express.json())
+app.use(logger("dev"))
+
 app.use("/", indexRoute)
 app.use("/vegetables", vegetablesRoute)
 app.use("/users", usersRoute)
