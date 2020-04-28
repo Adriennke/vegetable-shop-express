@@ -19,6 +19,8 @@ const vegetablesRoute = require("./routes/vegetablesRoute")
 const usersRoute = require("./routes/usersRoute")
 const ordersRoute = require("./routes/ordersRoute")
 
+const { setCors } = require("./middleware/security")
+
 mongoose.connect(
     "mongodb://127.0.0.1:27017/vegetable-shop", {
         useNewUrlParser: true,
@@ -30,6 +32,7 @@ mongoose.connection.on("open", () => console.log("database is connected"))
 
 app.use(express.json())
 app.use(logger("dev"))
+app.use(setCors)
 
 app.use("/", indexRoute)
 app.use("/vegetables", vegetablesRoute)
