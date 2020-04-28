@@ -7,19 +7,19 @@ const app = express()
 const mongoose = require("mongoose")
 const logger = require("morgan")
 
-
-//specify port
-const port = process.env.PORT || 4000;
-
-
-
 //import routes
 const indexRoute = require("./routes/indexRoute")
 const vegetablesRoute = require("./routes/vegetablesRoute")
 const usersRoute = require("./routes/usersRoute")
 const ordersRoute = require("./routes/ordersRoute")
 
-const { setCors } = require("./middleware/security")
+const {
+    setCors
+} = require("./middleware/security")
+
+
+//specify port
+const port = process.env.PORT || 4000;
 
 mongoose.connect(
     "mongodb://127.0.0.1:27017/vegetable-shop", {

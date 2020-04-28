@@ -5,8 +5,7 @@ const { Schema } = mongoose;
 const VegetableSchema = new Schema({
     name: {type: String, required: true},
     price: {type: String, required: true},
-    origin: {type: String, required: true},
-    image: {type: String, required: true}
+    origin: {type: String, required: true}
 },
 {
     toObject:{

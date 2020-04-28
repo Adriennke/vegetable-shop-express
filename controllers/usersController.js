@@ -2,6 +2,7 @@
 const createError = require("http-errors")
 // const db = require("../models/db")
 const User = require("../models/usersSchema")
+const { validationResult} = require("express-validator")
 
 // //set up route to new page
 exports.getUsers = async(req, res, next) => {

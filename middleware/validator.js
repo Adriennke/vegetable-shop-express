@@ -1,7 +1,7 @@
 const {body, validationResult} = require("express-validator");
 
 exports.validateInput = () => {
-    return[
+    return [
         body("email")
         .isEmail()
         .normalizeEmail()
