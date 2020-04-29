@@ -51,82 +51,82 @@
 
 //for usersSchema
 
-// const mongoose = require("mongoose")
-// const User = require("../models/usersSchema")
-// const faker = require("faker")
-
-
-// const main = async()=>{
-//     mongoose.connect("mongodb://127.0.0.1:27017/vegetable-shop", {
-//                 useNewUrlParser: true,
-//                 useUnifiedTopology: true
-// })
-//    mongoose.connection.on("error", (err) => console.log(err))
-//    mongoose.connection.on("open", () => console.log("database connected"))
-
-//    try {
-//        await User.deleteMany({})
-//        console.log("refresh users collection")
-//    } catch (err) {
-//        console.log(err)
-//    }
-//    let userPromises = Array(10).fill(null).map(() => {
-//                const user = new User(
-//                    //must match with the schema order
-//                    //take the user and create an object into it and use fake api to store fake users
-//                    {
-//                        firstName: faker.name.firstName(),
-//                        lastName: faker.name.lastName(),
-//                        email: faker.internet.email(),
-//                        password: faker.internet.password()
-//                    }
-//                )
-//                return user.save()
-//                 })
-//               try {
-//                   await Promise.all(userPromises);
-//                   console.log("users added into db")
-//               } catch (err) {
-//                   console.log(err)
-//               }
-// }
-// main()
-
-//for OrdersSchema
-const mongoose = require("mongoose");
-const Order = require("../models/ordersSchema");
+const mongoose = require("mongoose")
+const User = require("../models/usersSchema")
 const faker = require("faker")
 
-const main = async() => {
+
+const main = async()=>{
     mongoose.connect("mongodb://127.0.0.1:27017/vegetable-shop", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    mongoose.connection.on("error", (err) => console.log(err))
-    mongoose.connection.on("open", () => console.log("database connected"))
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+})
+   mongoose.connection.on("error", (err) => console.log(err))
+   mongoose.connection.on("open", () => console.log("database connected"))
 
-    try {
-        await Order.deleteMany({})
-        console.log("refresh orders collection")
-    } 
-    catch (error) {     
-        console.log(error)
-        
-    }
-    let orderPromises = Array(10).fill(null).map(()=>{
-        const order = new Order({
-            product: faker.commerce.product(),
-            amount: faker.finance.amount(),
-            price: faker.commerce.price()
-
-        })
-        return order.save()
-    })
-    try {
-        await Promise.all(orderPromises);
-        console.log("orders added into db")
-    } catch (error) {
-        console.log(error)        
-    }
+   try {
+       await User.deleteMany({})
+       console.log("refresh users collection")
+   } catch (err) {
+       console.log(err)
+   }
+   let userPromises = Array(10).fill(null).map(() => {
+               const user = new User(
+                   //must match with the schema order
+                   //take the user and create an object into it and use fake api to store fake users
+                   {
+                       firstName: faker.name.firstName(),
+                       lastName: faker.name.lastName(),
+                       email: faker.internet.email(),
+                       password: faker.internet.password()
+                   }
+               )
+               return user.save()
+                })
+              try {
+                  await Promise.all(userPromises);
+                  console.log("users added into db")
+              } catch (err) {
+                  console.log(err)
+              }
 }
 main()
+
+//for OrdersSchema
+// const mongoose = require("mongoose");
+// const Order = require("../models/ordersSchema");
+// const faker = require("faker")
+
+// const main = async() => {
+//     mongoose.connect("mongodb://127.0.0.1:27017/vegetable-shop", {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true
+//     })
+//     mongoose.connection.on("error", (err) => console.log(err))
+//     mongoose.connection.on("open", () => console.log("database connected"))
+
+//     try {
+//         await Order.deleteMany({})
+//         console.log("refresh orders collection")
+//     } 
+//     catch (error) {     
+//         console.log(error)
+        
+//     }
+//     let orderPromises = Array(10).fill(null).map(()=>{
+//         const order = new Order({
+//             product: faker.commerce.product(),
+//             amount: faker.finance.amount(),
+//             price: faker.commerce.price()
+
+//         })
+//         return order.save()
+//     })
+//     try {
+//         await Promise.all(orderPromises);
+//         console.log("orders added into db")
+//     } catch (error) {
+//         console.log(error)        
+//     }
+// }
+// main()

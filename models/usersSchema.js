@@ -7,20 +7,20 @@ const UserSchema = new Schema({
    lastName: {type: String, required: true},
    email: {type: String, required: true, unique:true},
    password: {type: String, required: true} 
-},
-{
-    toObject:{
-        virtuals: true
-    },
-    toJSON:{
-        virtuals: true
-    }
 }
+// {
+//     toObject:{
+//         virtuals: true
+//     },
+//     toJSON:{
+//         virtuals: true
+//     }
+// }
 )
 
-UserSchema.virtual("fullname").get(function(){
-    return `${this.firstName} ${this.lastName}`
-})
+// UserSchema.virtual("fullname").get(function(){
+//     return `${this.firstName} ${this.lastName}`
+// })
 
 UserSchema.plugin(uniqueValidator);
 
