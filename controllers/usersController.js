@@ -2,7 +2,7 @@
 const createError = require("http-errors")
 // const db = require("../models/db")
 const User = require("../models/usersSchema")
-const { validationResult} = require("express-validator")
+// const { validationResult} = require("express-validator")
 
 // //set up route to new page
 exports.getUsers = async(req, res, next) => {
@@ -28,7 +28,7 @@ exports.getUserById = async (req, res, next) => {
             users: user
         })
     } catch (error) {
-        next(error)
+        next({status:4040, message: "id is not valid"})
     }
 }
 // //request to add data

@@ -57,7 +57,7 @@
 
 
 // const main = async()=>{
-//     mongoose.connect("mongodb://127.0.0.1:27017/record-shop-live", {
+//     mongoose.connect("mongodb://127.0.0.1:27017/vegetable-shop", {
 //                 useNewUrlParser: true,
 //                 useUnifiedTopology: true
 // })
@@ -98,7 +98,7 @@ const Order = require("../models/ordersSchema");
 const faker = require("faker")
 
 const main = async() => {
-    mongoose.connect("mongodb://127.0.0.1:27017/record-shop-live", {
+    mongoose.connect("mongodb://127.0.0.1:27017/vegetable-shop", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
@@ -106,7 +106,7 @@ const main = async() => {
     mongoose.connection.on("open", () => console.log("database connected"))
 
     try {
-        await deleteMany({})
+        await Order.deleteMany({})
         console.log("refresh orders collection")
     } 
     catch (error) {     

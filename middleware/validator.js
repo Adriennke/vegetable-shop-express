@@ -33,7 +33,7 @@ exports.validateInput = () => {
                 let err = errors.errors.map(er =>({
                     [er.param]: er.msg
                 }))
-                res.json({
+                return res.json({
                     status: 203,
                     message: err
                 })

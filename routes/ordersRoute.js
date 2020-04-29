@@ -7,6 +7,7 @@ const {
     putOrder,
     deleteOrder
 } = require("../controllers/ordersController")
+// const { validateInput } = require("../middleware/validator")
 
 Router.get("/", getOrders)
 
