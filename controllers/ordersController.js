@@ -67,6 +67,7 @@ exports.deleteOrder = async(req, res, next) => {
     const { id }=req.params;
    try {
            const deletedOrder = await Order.findByIdAndDelete(id)
+           if (!deletedOrder) throw createError(404)
            res.json({
                success: true,
                order: this.deletedOrder

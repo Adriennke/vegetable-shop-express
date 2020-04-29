@@ -23,7 +23,7 @@ exports.getVegetableById = async(req, res, next) => {
 exports.getVegetables = async(req, res, next) => {
   try {
       const value = req.header("test")
-      if(value === 123){
+      if(value === "123"){
       const vegetables = await Vegetable.find()
       res.json({
           success: true,

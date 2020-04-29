@@ -85,3 +85,22 @@ exports.deleteUser = async(req, res, next) => {
     next(error)    
  }
 }
+exports.login = async(req,res,next) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({
+            email,
+            password
+        })
+        if(!user) throw createError("invalid password or email-address")
+        res.header("test", "123")
+        res.json({
+            success:true,
+            message: user.firstName + " welcome!"
+        })
+    } 
+    catch (error) {     
+        next(error)
+        
+    }
+}
