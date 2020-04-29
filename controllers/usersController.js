@@ -2,7 +2,7 @@
 const createError = require("http-errors")
 // const db = require("../models/db")
 const User = require("../models/usersSchema")
-// const { validationResult} = require("express-validator")
+const { validationResult} = require("express-validator")
 
 // //set up route to new page
 exports.getUsers = async(req, res, next) => {
@@ -75,6 +75,7 @@ exports.deleteUser = async(req, res, next) => {
  const { id } = req.params;
  try {
      const deletedUser = await User.findByIdAndDelete(id)
+     if(!deletedUser) throw createError(404)
      res.json({
          success: true,
          user: this.deletedUser

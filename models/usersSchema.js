@@ -1,12 +1,15 @@
 const mongoose = require("mongoose")
 const { Schema } = mongoose;
+const AddressSchema = require("./addressSchema")
+
 const uniqueValidator = require("mongoose-unique-validator")
 
 const UserSchema = new Schema({
    firstName: {type: String, required: true, unique:true},
    lastName: {type: String, required: true},
    email: {type: String, required: true, unique:true},
-   password: {type: String, required: true} 
+   password: {type: String, required: true},
+   address: AddressSchema
 }
 // {
 //     toObject:{

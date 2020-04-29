@@ -9,6 +9,7 @@ exports.getVegetableById = async(req, res, next) => {
 
  try {
    const vegetable = await Vegetable.findById(id)
+   if(!vegetable) throw createError(404)
     res.json({
         success: true,
         data: vegetable
@@ -21,11 +22,17 @@ exports.getVegetableById = async(req, res, next) => {
 
 exports.getVegetables = async(req, res, next) => {
   try {
+      const value = req.header("test")
+      if(value === 123){
       const vegetables = await Vegetable.find()
       res.json({
           success: true,
           data: vegetables
       })
+      } 
+      else{
+          throw createError("wrong")
+      }
   } 
   catch (error) {
       //instead of console.log, catch the error
@@ -44,7 +51,7 @@ exports.postVegetable = async(req, res, next) => {
 
             })
             //save it in db
-        vegetable.save()
+        await vegetable.save()
         res.json({
             success: true,
             data: vegetable
