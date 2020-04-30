@@ -88,7 +88,10 @@ exports.login = async(req,res,next) => {
             password
         })
         if(!user) throw createError("invalid password or email-address")
-        res.header("test", "123")
+        let token = jwt.sign({
+            _id: user._id
+        }, "secretkey")
+        res.header("test", token)
         res.json({
             success:true,
             message: user.firstName + " welcome!"
