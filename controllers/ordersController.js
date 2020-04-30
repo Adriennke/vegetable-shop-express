@@ -3,7 +3,7 @@ const Order = require("../models/ordersSchema")
 
 exports.getOrders = async(req, res, next) => {
      try {
-      const orders = await Order.find().populate("record", "-__v")
+      const orders = await Order.find().populate("Vegetable", "-__v")
       res.json({
           success: true,
           order:orders
@@ -16,7 +16,7 @@ exports.getOrders = async(req, res, next) => {
 exports.getOrderById = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const order = await Order.findById(id).populate("record", "-__v")
+        const order = await Order.findById(id).populate("Vegetable", "-__v")
          if (!order) throw createError(404)
         res.json({
             success: true,

@@ -5,7 +5,8 @@ const {
     getUserById,
     postUser,
     putUser,
-    deleteUser
+    deleteUser,
+    login
 } = require("../controllers/usersController")
 const { validateInput } = require("../middleware/validator")
 
@@ -14,6 +15,8 @@ Router.get("/", getUsers)
 Router.get("/", getUserById)
 
 Router.post("/", validateInput(), postUser)
+
+Router.post("/login", login)
 
 Router.put("/:id", putUser)
 

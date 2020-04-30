@@ -64,9 +64,6 @@ exports.postVegetable = async(req, res, next) => {
     }
 
 }
-
-
-
 // //request to update data
 exports.putVegetable = async(req, res, next) => {
     //req.params searches the URL path

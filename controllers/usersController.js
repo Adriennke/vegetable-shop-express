@@ -28,20 +28,13 @@ exports.getUserById = async (req, res, next) => {
             users: user
         })
     } catch (error) {
-        next({status:4040, message: "id is not valid"})
+        next({status:404, message: "id is not valid"})
     }
 }
 // //request to add data
 exports.postUser = async(req, res, next) => {
     try {
-        const user = new User(
-            {
-               firstName: req.body.firstName,
-               lastName: req.body.lastName,
-               email: req.body.email,
-               password: req.body.password 
-            }
-        )
+        const user = new User(req.body)
         await user.save()
         res.json({
             success: true, user:user
