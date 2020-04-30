@@ -3,6 +3,9 @@ const createError = require("http-errors")
 
 const Vegetable = require("../models/vegetablesSchema")
 
+const jwt = require("jsonwebtoken")
+
+
 // //set up route to new page
 exports.getVegetableById = async(req, res, next) => {
     const {id} = req.params
@@ -23,7 +26,8 @@ exports.getVegetableById = async(req, res, next) => {
 exports.getVegetables = async(req, res, next) => {
   try {
       const value = req.header("test")
-      if(value === "123"){
+      const check = jwt.verify(value, "secretkey")
+      if(check){
       const vegetables = await Vegetable.find()
       res.json({
           success: true,
@@ -31,7 +35,7 @@ exports.getVegetables = async(req, res, next) => {
       })
       } 
       else{
-          throw createError("wrong")
+          throw createError(404)
       }
   } 
   catch (error) {

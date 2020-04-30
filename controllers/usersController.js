@@ -3,6 +3,7 @@ const createError = require("http-errors")
 // const db = require("../models/db")
 const User = require("../models/usersSchema")
 const { validationResult} = require("express-validator")
+const jwt = require("jsonwebtoken")
 
 // //set up route to new page
 exports.getUsers = async(req, res, next) => {
@@ -35,6 +36,7 @@ exports.getUserById = async (req, res, next) => {
 exports.postUser = async(req, res, next) => {
     try {
         const user = new User(req.body)
+        user.generateAuthToken()
         await user.save()
         res.json({
             success: true, user:user
