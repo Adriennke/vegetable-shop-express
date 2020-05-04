@@ -6,18 +6,20 @@ const {
     postVegetable,
     putVegetable,
     deleteVegetable
-} = require("../controllers/vegetablesController")
+} = require("../controllers/vegetablesController");
+const auth = require("../middleware/authenticator");
 
 
 
-Router.get("/:id", getVegetableById)
 
-Router.get("/", getVegetables)
+Router.get("/:id",auth, getVegetableById)
 
-Router.post("/", postVegetable)
+Router.get("/",auth, getVegetables)
 
-Router.put("/:id", putVegetable)
+Router.post("/",auth, postVegetable)
 
-Router.delete("/:id", deleteVegetable)
+Router.put("/:id",auth, putVegetable)
+
+Router.delete("/:id",auth, deleteVegetable)
 
 module.exports = Router;
