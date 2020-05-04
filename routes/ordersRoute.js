@@ -8,15 +8,16 @@ const {
     deleteOrder
 } = require("../controllers/ordersController")
 // const { validateInput } = require("../middleware/validator")
+const auth = require("../middleware/authenticator");
 
-Router.get("/", getOrders)
+Router.get("/",auth, getOrders)
 
-Router.get("/", getOrderById)
+Router.get("/",auth, getOrderById)
 
-Router.post("/", postOrder)
+Router.post("/",auth, postOrder)
 
-Router.put("/:id", putOrder)
+Router.put("/:id",auth, putOrder)
 
-Router.delete("/:id", deleteOrder)
+Router.delete("/:id",auth, deleteOrder)
 
 module.exports = Router;
