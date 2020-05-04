@@ -25,18 +25,11 @@ exports.getVegetableById = async(req, res, next) => {
 
 exports.getVegetables = async(req, res, next) => {
   try {
-      const value = req.header("test")
-      const check = jwt.verify(value, "secretkey")
-      if(check){
       const vegetables = await Vegetable.find()
       res.json({
           success: true,
           data: vegetables
       })
-      } 
-      else{
-          throw createError(404)
-      }
   } 
   catch (error) {
       //instead of console.log, catch the error
@@ -46,16 +39,10 @@ exports.getVegetables = async(req, res, next) => {
 // //request to add data
 exports.postVegetable = async(req, res, next) => {
     try {
-        const vegetable = new Vegetable(
-            { 
-                name: req.body.name,
-                price: req.body.price,
-                origin: req.body.origin,
-                image: req.body.image
-
-            })
+        const vegetable = new Vegetable(req.body)
             //save it in db
         await vegetable.save()
+        
         res.json({
             success: true,
             data: vegetable
