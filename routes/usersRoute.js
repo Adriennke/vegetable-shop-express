@@ -10,8 +10,9 @@ const {
 } = require("../controllers/usersController")
 const { validateInput } = require("../middleware/validator")
 const auth = require("../middleware/authenticator");
+const isAdmin = require("../middleware/rolesAuthenticator");
 
-Router.get("/",auth, getUsers)
+Router.get("/", auth, isAdmin, getUsers)
 
 Router.get("/",auth, getUserById)
 
