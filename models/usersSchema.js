@@ -15,6 +15,11 @@ const UserSchema = new Schema({
    firstName: {type: String, required: true, unique:true},
    lastName: {type: String, required: true},
    email: {type: String, required: true, unique:true},
+   role:{
+       type: String,
+       enum: ["Admin", "User"],
+       required: true
+   },
    tokens: [{
              token: {
                 type: String,
@@ -60,7 +65,7 @@ UserSchema.methods.getPublicFields = function(){
    return returnObject;
 }
 
-UserSchema.methods.checkPassword = async function() {
+UserSchema.methods.checkPassword = async function(password) {
     const user = this;
     return await compare(password, user.password)
 }
