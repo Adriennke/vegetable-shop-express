@@ -9,17 +9,18 @@ const {
     login
 } = require("../controllers/usersController")
 const { validateInput } = require("../middleware/validator")
+const auth = require("../middleware/authenticator");
 
-Router.get("/", getUsers)
+Router.get("/",auth, getUsers)
 
-Router.get("/", getUserById)
+Router.get("/",auth, getUserById)
 
 Router.post("/", validateInput(), postUser)
 
 Router.post("/login", login)
 
-Router.put("/:id", putUser)
+Router.put("/:id",auth, putUser)
 
-Router.delete("/:id", deleteUser)
+Router.delete("/:id",auth, deleteUser)
 
 module.exports = Router;
