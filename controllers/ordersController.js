@@ -45,9 +45,7 @@ exports.postOrder = async(req, res, next) => {
 }
 
 exports.putOrder = async(req, res, next) => {
-    const {
-        id
-    } = req.params
+    const {id} = req.params
     try {
         const order = await
         Order.findByIdAndUpdate(id,req.body )

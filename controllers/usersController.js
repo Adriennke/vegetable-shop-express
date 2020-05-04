@@ -36,11 +36,16 @@ exports.getUserById = async (req, res, next) => {
 exports.postUser = async(req, res, next) => {
     try {
         const user = new User(req.body)
-        user.generateAuthToken()
+        const token = user.generateAuthToken()
         await user.save()
-        res.json({
-            success: true, user:user
-        })
+
+
+      const data = user.getPublicFields()
+      //first set the header and then the respond 
+      res.header("x-auth", token).json({
+          success: true,
+          user: data
+      })
     }
      catch (error) {
        next(error) 
@@ -83,18 +88,17 @@ exports.deleteUser = async(req, res, next) => {
 exports.login = async(req,res,next) => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({
-            email,
-            password
-        })
-        if(!user) throw createError("invalid password or email-address")
-        let token = jwt.sign({
-            _id: user._id
-        }, "secretkey")
-        res.header("test", token)
-        res.json({
-            success:true,
-            message: user.firstName + " welcome!"
+        const user = await User.findOne({email})
+        const valid = await user.checkPassword(password)
+
+        if(!valid) throw createError(403)
+
+        let token = user.generateAuthToken()
+        const data = user.getPublicFields()
+
+        res.header("x-auth", token).json({
+            success: true,
+            user:data
         })
     } 
     catch (error) {     
