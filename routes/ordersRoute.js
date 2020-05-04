@@ -9,8 +9,9 @@ const {
 } = require("../controllers/ordersController")
 // const { validateInput } = require("../middleware/validator")
 const auth = require("../middleware/authenticator");
+const isAdmin = require("../middleware/rolesAuthenticator");
 
-Router.get("/",auth, getOrders)
+Router.get("/",auth, isAdmin, getOrders)
 
 Router.get("/",auth, getOrderById)
 
