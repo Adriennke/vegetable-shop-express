@@ -6,7 +6,7 @@ const createError = require("http-errors")
 const app = express()
 const mongoose = require("mongoose")
 const logger = require("morgan")
-
+const env = require("./config/config")
 //import routes
 const indexRoute = require("./routes/indexRoute")
 const vegetablesRoute = require("./routes/vegetablesRoute")
@@ -22,7 +22,7 @@ const {
 const port = process.env.PORT || 4000;
 
 mongoose.connect(
-    "mongodb://127.0.0.1:27017/vegetable-shop", {
+    env.db, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }

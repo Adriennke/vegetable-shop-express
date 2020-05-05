@@ -7,6 +7,7 @@ const {
    encrypt,
    compare
 } = require("../lib/encryption")
+const env = require("../config/config")
 
 
 const uniqueValidator = require("mongoose-unique-validator")
@@ -48,7 +49,7 @@ const UserSchema = new Schema({
 UserSchema.methods.generateAuthToken = function(){
    const user = this;
 
-   const token = jwt.sign({_id:user._id}, "secretkey").toString()
+   const token = jwt.sign({_id:user._id}, env.jwt_key).toString()
 
    user.tokens.push({token})
 
@@ -82,7 +83,7 @@ UserSchema.statics.findByToken = function (token) {
    let decoded;
 
    try {
-      decoded = jwt.verify(token, "secretkey");
+      decoded = jwt.verify(token, env.jwt_key);
 
    } catch (error) {
       return;
