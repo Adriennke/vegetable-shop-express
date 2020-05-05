@@ -2,7 +2,7 @@
     "name": "vegetable-shop",
     "builds": [{
         "src": "app.js",
-        "use": "@now/node"
+        "use": "@now/node@canary"
     }],
     "version": 2,
     "routes": [{
