@@ -5,10 +5,12 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "build": "node build --output public"
   },
   "keywords": [],
-  "author": "",
+  "author": "adrienn tollas",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^4.0.1",
