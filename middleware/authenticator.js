@@ -1,4 +1,4 @@
-const User = require("../models/userSchema")
+const User = require("../models/usersSchema")
 const createError = require("http-errors")
 
 const auth = async (req, res, next) => {
