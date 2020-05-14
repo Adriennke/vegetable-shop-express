@@ -1,0 +1,118 @@
+.container {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100vh;
+  height: 100%;
+  min-height: 100%;
+  font-family: 'Montserrat',
+    sans-serif;
+}
+
+.side-bar {
+  height: 100%;
+  width: 180px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-image: url(./components/img/bck-image.jpg);
+  background-size: contain;
+  overflow-x: hidden;
+  padding-top: 100px;
+}
+
+.side-bar a {
+  padding: 6px 8px 6px 45px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 100;
+  display: block;
+}
+
+.side-bar a:hover {
+  color: #000000;
+}
+
+
+/* @media screen and (max-height: 500px) {
+  .side-bar {
+    padding-top: 15px;
+  }
+
+  .side-bar a {
+    font-size: 18px;
+  }
+} */
+
+.logo {
+  display: inline-block;
+  border: 1px solid white;
+  width: 120px;
+  height: 40px;
+  margin: 6px 10px 40px 20px;
+}
+
+.logo h2 {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1px;
+  color: white;
+  font-weight: 100;
+}
+
+.logo:hover {
+  background-color: #E6E4F5;
+}
+
+.container>.main {
+  position: absolute;
+  /* background-color: #DDE3EA; */
+  background-image: url(./components/img/lilapotato.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 173px;
+  height: 100%;
+  width: 100%;
+}
+
+h1 {
+  margin: 0;
+  padding-top: 45px;
+  color: #ffffff;
+  font-size: 90px;
+  font-weight: 200;
+  text-align: center;
+}
+
+h3 {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 100;
+  text-align: center;
+}
+
+p {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 100;
+  text-align: center;
+
+}
+
+.description {
+  border: 1px solid white;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.extra-line {
+  border: 1px solid white;
+  width: 420px;
+  height: 255px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
