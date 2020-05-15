@@ -1,29 +1,21 @@
-/* .container {
-  padding: 0;
+html {
   margin: 0;
-  /* display: flex; */
-width: 100%;
-height: 100vh;
-/* min-height: 100%; */
-font-family: 'Montserrat',
-sans-serif;
 }
 
 .side-bar {
   height: 100%;
-  width: 180px;
+  width: 140px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   background-image: url(./components/img/bck-image.jpg);
   background-size: contain;
-  overflow-x: hidden;
   padding-top: 100px;
 }
 
 .side-bar a {
-  padding: 6px 8px 6px 45px;
+  padding: 6px 8px 6px 32px;
   text-decoration: none;
   font-size: 20px;
   color: #ffffff;
@@ -35,13 +27,11 @@ sans-serif;
   color: #000000;
 }
 
-
 .logo {
-  display: inline-block;
   border: 1px solid white;
   width: 120px;
+  margin: 0 auto;
   height: 40px;
-  margin: 6px 10px 40px 20px;
 }
 
 .logo h2 {
@@ -56,21 +46,40 @@ sans-serif;
   background-color: #E6E4F5;
 }
 
-.main {
-  position: absolute;
-  /* background-color: #DDE3EA; */
+.container {
+  position: relative;
+  left: 0;
   background-image: url(./components/img/lilapotato.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  margin-left: 173px;
-  height: 100%;
   width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  overflow-y: hidden;
+  font-family: 'Montserrat',
+    sans-serif;
+}
+
+.intro {
+  position: relative;
+  width: 100%;
+  left: 140px;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    left: 30px;
+  }
 }
 
 h1 {
   margin: 0;
-  padding-top: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  padding-top: 50px;
   color: #ffffff;
   font-size: 90px;
   font-weight: 200;
@@ -106,5 +115,3 @@ p {
   margin: 0 auto;
   margin-top: 10px;
 }
-
-*/

@@ -1,13 +1,14 @@
 import React from 'react';
-import './App.css';
+// import './Reset.css';
+import './App2.css';
 import Sidebar from './components/Sidebar';
 import Home from './components/Home';
 
 function App() {
   return (
     <div className="container">
-    <Sidebar / >
-    <Home />
+      <Sidebar />
+      <Home />
     </div>
   );
 }
